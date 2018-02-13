@@ -18,6 +18,7 @@ import { HttpModule } from "@angular/http";
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { BookingPage } from '../pages/booking/booking';
 import { OneToOnePage } from '../pages/one2one/one-to-one';
 import { Signup } from '../pages/signup/signup';
 import { Login } from '../pages/login/login';
@@ -67,6 +68,7 @@ export const firebaseConfig = {
     AboutPage,
     HomePage,
     TabsPage,
+    BookingPage,
     OneToOnePage,
     Signup,
     Login,
@@ -99,6 +101,7 @@ export const firebaseConfig = {
     AboutPage,
     HomePage,
     TabsPage,
+    BookingPage,
     OneToOnePage, 
     Signup,
     Login, 

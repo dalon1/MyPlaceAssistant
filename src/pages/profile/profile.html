@@ -8,6 +8,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab top right>
+    <button ion-fab mini><ion-icon name="help"></ion-icon></button>
+    <ion-fab-list side="bottom">
+      <button ion-fab (click)="updateProfile()"><ion-icon name="contact"></ion-icon></button>
+      <button ion-fab (click)="logout()"><ion-icon name="log-out"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
   <ion-list *ngIf="user | async; then loggedProfile else guestProfile">
 
   </ion-list>
@@ -34,10 +42,6 @@
     <ion-item text-wrap>
       <ion-icon name="map" item-left></ion-icon> Country: {{ (user | async)?.country }}
     </ion-item>
-    
-    <button ion-button full color="secondary" (click)="updateProfile()">Update Profile</button>
-    <button ion-button full color="primary" (click)="logout()">Log out</button>
-    
 
   </ng-template>
   <ng-template #guestProfile>

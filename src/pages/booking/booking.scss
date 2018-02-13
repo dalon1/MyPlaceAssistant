@@ -1,0 +1,32 @@
+booking-page {
+    .profile-picture {
+        // this should be changed soon. Use em instead of px
+        background: black;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .document-title{
+        font-weight: bold;
+    }
+
+    .facility-content {
+        font-size: 0.750em;
+        color: #8e9097;  
+    }
+    .document-description {
+        font-style: italic;
+    }
+
+    .item-avatar  {     
+        width:100% !important;  
+        height : 100% !important;  
+        max-width: 72px !important;  //any size
+        max-height: 72px !important; //any size 
+        }
+    
+}
