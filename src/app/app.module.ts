@@ -35,6 +35,9 @@ import { FileAddForm } from '../pages/file-manage/file-add-form';
 import { FileDetailPage } from '../pages/file-details/file-details';
 import { FileUpload } from '../pages/file-upload/file-upload';
 
+// My Place Assistant: New Pages >>
+import { PaymentMethodPage } from '../pages/payment-method/payment-method';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //import { Camera } from '@ionic-native/camera'; npm install --save @ionic-native/core@4.2.0 - current 3.12.1
@@ -47,6 +50,12 @@ import { FileCommentManager } from '../providers/data-service/file-comments-serv
 import { UserManager } from '../providers/data-service/user-service';
 import { NewsManager} from '../providers/data-service/news-service';
 import { CountryManager } from '../providers/data-service/country-service';
+
+// My Place Assistant : New Providers >>
+import { BookingManager } from '../providers/data-service/booking-service';
+import { PaymentMethodManager } from '../providers/data-service/payment-method-service';
+import { BuildingManager } from '../providers/data-service/building-service';
+import { FacilityManager } from '../providers/data-service/facility-service';
 
 import { UserIdPipe } from '../utils/pipes/user-id-pipe';
 
@@ -84,7 +93,8 @@ export const firebaseConfig = {
     FilesPage,
     FileDetailPage,
     UserIdPipe,
-    FileUpload
+    FileUpload,
+    PaymentMethodPage 
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -116,7 +126,8 @@ export const firebaseConfig = {
     FileAddForm,
     FilesPage,
     FileDetailPage,
-    FileUpload
+    FileUpload,
+    PaymentMethodPage
   ],
   providers: [
     StatusBar,
@@ -132,7 +143,11 @@ export const firebaseConfig = {
     UserManager,
     NewsManager,
     CountryManager,
-    LocalSession
+    LocalSession,
+    BuildingManager,
+    FacilityManager,
+    BookingManager, 
+    PaymentMethodManager
   ]
 })
 export class AppModule {}

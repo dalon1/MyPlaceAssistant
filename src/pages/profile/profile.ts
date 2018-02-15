@@ -4,6 +4,7 @@ import { AuthService } from '../../providers/auth-service/auth-service';
 import { Welcome } from '../welcome/welcome';
 import { Signup } from '../signup/signup';
 import { ProfileForm } from './profile-form';
+import { PaymentMethodPage } from '../payment-method/payment-method';
 import { DataService } from '../../providers/data-service/data-service';
 import { IUser } from '../../models/IUser';
 import { Observable } from 'rxjs/Observable';
@@ -60,6 +61,10 @@ export class Profile {
   updateProfile() {
     //this.app.getRootNav().push(ProfileForm);
     this.modalController.create(ProfileForm).present();
+  }
+
+  updatePaymentMethod() {
+    this.modalController.create(PaymentMethodPage).present();
   }
 
   signUpFromGuestPage() {
