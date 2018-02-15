@@ -1,0 +1,15 @@
+transaction-history {
+    .center {
+        text-align: center;
+    }
+    .title-holder-reservation {
+        @extend .center;
+        background-color: cadetblue;
+        
+    }
+
+    .title-holder-maintenance {
+        @extend .center;
+        background-color: greenyellow;
+    }
+}

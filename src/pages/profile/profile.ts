@@ -5,6 +5,7 @@ import { Welcome } from '../welcome/welcome';
 import { Signup } from '../signup/signup';
 import { ProfileForm } from './profile-form';
 import { PaymentMethodPage } from '../payment-method/payment-method';
+import { MyPlace } from '../myplace/myplace';
 import { DataService } from '../../providers/data-service/data-service';
 import { IUser } from '../../models/IUser';
 import { Observable } from 'rxjs/Observable';
@@ -67,6 +68,10 @@ export class Profile {
     this.modalController.create(PaymentMethodPage).present();
   }
 
+  updateMyPlaces() {
+    this.app.getRootNav().push(MyPlace);
+  }
+  
   signUpFromGuestPage() {
     this.app.getRootNav().push(Signup);
   }

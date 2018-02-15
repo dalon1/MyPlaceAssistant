@@ -37,6 +37,9 @@ import { FileUpload } from '../pages/file-upload/file-upload';
 
 // My Place Assistant: New Pages >>
 import { PaymentMethodPage } from '../pages/payment-method/payment-method';
+import { TransactionHistory } from '../pages/transactions/transaction-history';
+import { Messenger } from '../pages/messenger/messenger';
+import { MyPlace } from '../pages/myplace/myplace';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -94,7 +97,10 @@ export const firebaseConfig = {
     FileDetailPage,
     UserIdPipe,
     FileUpload,
-    PaymentMethodPage 
+    PaymentMethodPage,
+    TransactionHistory,
+    Messenger, 
+    MyPlace 
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -127,7 +133,10 @@ export const firebaseConfig = {
     FilesPage,
     FileDetailPage,
     FileUpload,
-    PaymentMethodPage
+    PaymentMethodPage,
+    TransactionHistory,
+    Messenger,
+    MyPlace
   ],
   providers: [
     StatusBar,

@@ -6,6 +6,8 @@ import { News } from '../news/news';
 import { BookingPage } from '../booking/booking';
 import { Profile } from '../profile/profile';
 import { OneToOnePage } from '../one2one/one-to-one';
+import { TransactionHistory } from '../transactions/transaction-history';
+import { Messenger } from '../messenger/messenger';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -13,9 +15,10 @@ import { OneToOnePage } from '../one2one/one-to-one';
 export class TabsPage {
 
   tab1Root = HomePage;
-  tab2Root = OneToOnePage;
+  tab2Root = Messenger;
   tab3Root = Profile;
   tab4Root = BookingPage;
+  tab5Root = TransactionHistory;
 
   constructor() {
 
