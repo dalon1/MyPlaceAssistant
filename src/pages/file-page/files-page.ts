@@ -4,7 +4,7 @@ import { IDocument } from '../../models/IDocuments';
 import { Element } from '../../models/Element';
 import { FileManager } from '../../providers/data-service/file-service';
 import { FileDetailPage } from '../file-details/file-details';
-import { ExternalProfile } from '../profile/external-profile';
+import { ExternalProfile } from '../profile/external-main/external-profile';
 import { IUser } from '../../models/IUser';
 import { UserManager } from '../../providers/data-service/user-service';
 import { App } from 'ionic-angular';

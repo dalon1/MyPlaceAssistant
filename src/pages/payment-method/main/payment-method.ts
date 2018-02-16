@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { PaymentMethodManager } from "../../providers/data-service/payment-method-service";
+import { PaymentMethodManager } from "../../../providers/data-service/payment-method-service";
 import { ViewController } from "ionic-angular/navigation/view-controller";
 
 @Component({

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { App, ActionSheetController, ViewController, AlertController } from 'ionic-angular';
-import { Profile } from './profile';
-import { AuthService } from '../../providers/auth-service/auth-service';
-import { UserManager } from '../../providers/data-service/user-service';
-import { CountryManager } from '../../providers/data-service/country-service';
-import { IUser } from '../../models/IUser';
-import { ICountry } from '../../models/ICountry';
+import { AuthService } from '../../../providers/auth-service/auth-service';
+import { UserManager } from '../../../providers/data-service/user-service';
+import { CountryManager } from '../../../providers/data-service/country-service';
+import { IUser } from '../../../models/IUser';
+import { ICountry } from '../../../models/ICountry';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

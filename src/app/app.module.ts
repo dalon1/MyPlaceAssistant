@@ -15,11 +15,9 @@ import { MainApp } from './app.component';
 
 import { HttpModule } from "@angular/http";
 
-import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { BookingPage } from '../pages/booking/booking';
-import { OneToOnePage } from '../pages/one2one/one-to-one';
+import { BookingPage } from '../pages/booking/main/booking';
 import { Signup } from '../pages/signup/signup';
 import { Login } from '../pages/login/login';
 import { Welcome } from '../pages/welcome/welcome';
@@ -27,19 +25,31 @@ import { News } from '../pages/news/news';
 import { NewsDetailPage } from '../pages/news/news-details';
 import { NewsAddForm } from '../pages/news-manage/news-add-form';
 import { ResetPassword } from '../pages/reset-password/reset-password';
-import { Profile } from '../pages/profile/profile';
-import { ProfileForm } from '../pages/profile/profile-form';
-import { ExternalProfile } from '../pages/profile/external-profile';
+import { Profile } from '../pages/profile/internal-main/profile';
+import { ProfileForm } from '../pages/profile/form/profile-form';
+import { ExternalProfile } from '../pages/profile/external-main/external-profile';
 import { FilesPage } from '../pages/file-page/files-page';
 import { FileAddForm } from '../pages/file-manage/file-add-form';
 import { FileDetailPage } from '../pages/file-details/file-details';
 import { FileUpload } from '../pages/file-upload/file-upload';
 
 // My Place Assistant: New Pages >>
-import { PaymentMethodPage } from '../pages/payment-method/payment-method';
-import { TransactionHistory } from '../pages/transactions/transaction-history';
+import { PaymentMethodPage } from '../pages/payment-method/main/payment-method';
+//import { PaymentMethodDetailsPage } from '../pages/payment-method/details/payment-method-details';
+//import { PaymentMethodDetailsPage } from '../pages/payment-method/details/payment-method-details';
+import { PaymentMethodFormPage } from '../pages/payment-method/form/payment-method-form';
+
+import { TransactionHistoryPage } from '../pages/transactions/main/transaction-history';
+import { TransactionDetailsPage } from '../pages/transactions/details/transaction-details';
+import { TransactionFormPage } from '../pages/transactions/form/transaction-form';
+
+import { MyPlacePage } from '../pages/myplace/main/myplace';
+import { MyPlaceDetailsPage } from '../pages/myplace/details/myplace-details';
+import { MyPlaceFormPage } from '../pages/myplace/form/myplace-form';
+
+
 import { Messenger } from '../pages/messenger/messenger';
-import { MyPlace } from '../pages/myplace/myplace';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -77,11 +87,9 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MainApp,
-    AboutPage,
     HomePage,
     TabsPage,
     BookingPage,
-    OneToOnePage,
     Signup,
     Login,
     Welcome,
@@ -98,9 +106,15 @@ export const firebaseConfig = {
     UserIdPipe,
     FileUpload,
     PaymentMethodPage,
-    TransactionHistory,
-    Messenger, 
-    MyPlace 
+   // PaymentMethodDetailsPage,
+    PaymentMethodFormPage,
+    TransactionHistoryPage,
+    TransactionDetailsPage,
+    TransactionFormPage,
+    MyPlacePage,
+    MyPlaceDetailsPage,
+    MyPlaceFormPage,
+    Messenger
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -114,11 +128,9 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MainApp,
-    AboutPage,
     HomePage,
     TabsPage,
-    BookingPage,
-    OneToOnePage, 
+    BookingPage, 
     Signup,
     Login, 
     Welcome,
@@ -134,9 +146,15 @@ export const firebaseConfig = {
     FileDetailPage,
     FileUpload,
     PaymentMethodPage,
-    TransactionHistory,
-    Messenger,
-    MyPlace
+    //PaymentMethodDetailsPage,
+    PaymentMethodFormPage,
+    TransactionHistoryPage,
+    TransactionDetailsPage,
+    TransactionFormPage,
+    MyPlacePage,
+    MyPlaceDetailsPage,
+    MyPlaceFormPage,
+    Messenger
   ],
   providers: [
     StatusBar,

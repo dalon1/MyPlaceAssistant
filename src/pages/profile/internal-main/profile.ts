@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { App, NavController, NavParams, ModalController } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service/auth-service';
-import { Welcome } from '../welcome/welcome';
-import { Signup } from '../signup/signup';
-import { ProfileForm } from './profile-form';
-import { PaymentMethodPage } from '../payment-method/payment-method';
-import { MyPlace } from '../myplace/myplace';
-import { DataService } from '../../providers/data-service/data-service';
-import { IUser } from '../../models/IUser';
+import { AuthService } from '../../../providers/auth-service/auth-service';
+import { Welcome } from '../../welcome/welcome';
+import { Signup } from '../../signup/signup';
+import { ProfileForm } from '../form/profile-form';
+import { PaymentMethodPage } from '../../payment-method/main/payment-method';
+import { MyPlacePage } from '../../myplace/main/myplace';
+import { DataService } from '../../../providers/data-service/data-service';
+import { IUser } from '../../../models/IUser';
 import { Observable } from 'rxjs/Observable';
 import { FirebaseApp } from 'angularfire2';
 import 'firebase/storage';
 import { AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
-import { UserManager } from '../../providers/data-service/user-service';
+import { UserManager } from '../../../providers/data-service/user-service';
 
 /**
  * Generated class for the ProfilePage page.
@@ -69,7 +69,7 @@ export class Profile {
   }
 
   updateMyPlaces() {
-    this.app.getRootNav().push(MyPlace);
+    this.app.getRootNav().push(MyPlacePage);
   }
   
   signUpFromGuestPage() {

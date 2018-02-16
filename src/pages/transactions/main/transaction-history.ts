@@ -4,6 +4,6 @@ import { Component } from "@angular/core";
     selector: 'transaction-history',
     templateUrl: 'transaction-history.html'
 })
-export class TransactionHistory {
-
+export class TransactionHistoryPage {
+    constructor() {}
 }

@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
     selector: 'myplace-page',
     templateUrl: 'myplace.html'
 })
-export class MyPlace {
+export class MyPlacePage {
     constructor() {}
 }

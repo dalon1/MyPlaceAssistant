@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, App } from 'ionic-angular';
-import { NewsAddForm } from '../news-manage/news-add-form';
-import { NewsManager } from '../../providers/data-service/news-service';
-import { UserManager } from '../../providers/data-service/user-service';
+import { NewsAddForm } from '../../news-manage/news-add-form';
+import { NewsManager } from '../../../providers/data-service/news-service';
+import { UserManager } from '../../../providers/data-service/user-service';
 import { Observable } from 'rxjs/Observable';
-import { INews } from '../../models/INews';
-import { IUser } from '../../models/IUser';
-import { NewsDetailPage } from '../../pages/news/news-details';
-import { LocalSession } from '../../providers/session/local-session';
+import { INews } from '../../../models/INews';
+import { IUser } from '../../../models/IUser';
+import { NewsDetailPage } from '../../../pages/news/news-details';
+import { LocalSession } from '../../../providers/session/local-session';
 
 /**
  * Generated class for the NewsPage page.
