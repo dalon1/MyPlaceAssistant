@@ -69,6 +69,7 @@ import { BookingManager } from '../providers/data-service/booking-service';
 import { PaymentMethodManager } from '../providers/data-service/payment-method-service';
 import { BuildingManager } from '../providers/data-service/building-service';
 import { FacilityManager } from '../providers/data-service/facility-service';
+import { TransactionManager } from '../providers/data-service/transaction-service';
 
 import { UserIdPipe } from '../utils/pipes/user-id-pipe';
 
@@ -174,7 +175,8 @@ export const firebaseConfig = {
     BuildingManager,
     FacilityManager,
     BookingManager, 
-    PaymentMethodManager
+    PaymentMethodManager,
+    TransactionManager
   ]
 })
 export class AppModule {}
