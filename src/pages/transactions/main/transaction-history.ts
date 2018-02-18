@@ -22,15 +22,20 @@ export class TransactionHistoryPage {
     ) {}
     
     ngOnInit() {
-
+        this.transactionHistory = this.loadTransactionHistory();
+        console.log(this.transactionHistory);
     }
 
     loadTransactionHistory() : Array<TransactionModel> {
         let transactionHistory : Array<TransactionModel> = new Array<TransactionModel>();
-        this.transactionManager.getTransactionHistory(null).subscribe((data: Array<ITransaction>)=> {
-
+        this.transactionManager.getTransactionHistory(this.authManager.afAuth.auth.currentUser.uid).subscribe((data: Array<ITransaction>)=> {
+            data.forEach((transaction : ITransaction) => {
+                let user: IUser  = null;
+                let place: IPlace = null;
+                transactionHistory.push(new TransactionModel(transaction, user, place));
+            });
         });
-        return null;
+        return transactionHistory;
     }
 }
 

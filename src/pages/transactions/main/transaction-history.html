@@ -16,11 +16,13 @@
   
   
   <ion-content>
-  
-    <ion-card>
-        <ion-item class="title-holder-reservation">
-            <h5>Reservation</h5>
-            <h1>$200.00 <small>USD</small></h1>
+
+    <ion-card *ngFor="let model of transactionHistory">
+        <ion-item [ngClass]="{'title-holder-reservation': model.transaction.transactionType === 'Reservation', 
+        'title-holder-maintenance': model.transaction.transactionType === 'Maintenance',
+        'title-holder-other': model.transaction.transactionType === 'Other'}">
+            <h5>{{ model.transaction.transactionType }}</h5>
+            <h1>${{ model.transaction.amount | number: '1.2-2' }} <small>{{ model.transaction.currency }}</small></h1>
         </ion-item>
 
         <!-- body -->
@@ -35,31 +37,9 @@
             <span item-left>
                 <ion-icon name="card"></ion-icon> *** 1010
             </span>
-            <span item-end>12/12/2017</span>
+            <span item-end>{{ model.transaction.createdAt | date: 'short' }}</span>
         </ion-item>
     </ion-card>    
-
-    <ion-card>
-            <ion-item class="title-holder-maintenance">
-                <h5>Maintenance</h5>
-                <h1>$400.00 <small>USD</small></h1>
-            </ion-item>
-    
-            <!-- body -->
-            <ion-item>
-                <ion-icon name="wine" item-left large ></ion-icon>
-                <h2>Institute of Fine Cocktails</h2>
-                <p>14 S. Hop Avenue, Madison, WI 53703</p>
-            </ion-item>
-    
-            <!-- footer -->
-            <ion-item>
-                <span item-left>
-                    <ion-icon name="card"></ion-icon> *** 1010
-                </span>
-                <span item-end>12/12/2017</span>
-            </ion-item>
-        </ion-card>    
     
     
         <ion-fab bottom right>

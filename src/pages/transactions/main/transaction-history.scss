@@ -12,4 +12,9 @@ transaction-history {
         @extend .center;
         background-color: greenyellow;
     }
+
+    .title-holder-other {
+        @extend .center;
+        background-color: orange;
+    }
 }
