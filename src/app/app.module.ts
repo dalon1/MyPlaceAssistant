@@ -75,12 +75,12 @@ import { UserIdPipe } from '../utils/pipes/user-id-pipe';
 import { LocalSession } from '../providers/session/local-session';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyB36ByzinH0EjOJ6qQmWUNXLN4iVbbCgsA",
-  authDomain: "myoralvillage-5f158.firebaseapp.com",
-  databaseURL: "https://myoralvillage-5f158.firebaseio.com",
-  projectId: "myoralvillage-5f158",
-  storageBucket: "myoralvillage-5f158.appspot.com",
-  messagingSenderId: "382379836155"
+  apiKey: "AIzaSyDNmA_voZbbnbJ5S6JwvddZRbq70yvXAn8",
+  authDomain: "myplaceassistant-x2018.firebaseapp.com",
+  databaseURL: "https://myplaceassistant-x2018.firebaseio.com",
+  projectId: "myplaceassistant-x2018",
+  storageBucket: "myplaceassistant-x2018.appspot.com",
+  messagingSenderId: "1746596476"
 }
 
 
