@@ -17,7 +17,7 @@
   
   <ion-content>
 
-    <ion-card *ngFor="let model of transactionHistory">
+    <ion-card *ngFor="let model of transactionHistory" (click)="getDetails(model.transaction.id)">
         <ion-item [ngClass]="{'title-holder-reservation': model.transaction.transactionType === 'Reservation', 
         'title-holder-maintenance': model.transaction.transactionType === 'Maintenance',
         'title-holder-other': model.transaction.transactionType === 'Other'}">
@@ -42,11 +42,8 @@
     </ion-card>    
     
     
-        <ion-fab bottom right>
-                <button ion-fab mini><ion-icon name="add"></ion-icon></button>
-                <ion-fab-list side="top">
-                  <button ion-fab>PAY</button>
-                </ion-fab-list>
+        <ion-fab bottom right (click)="addTransaction()">
+            <button ion-fab mini><ion-icon name="add"></ion-icon></button>
         </ion-fab>
   </ion-content>
   

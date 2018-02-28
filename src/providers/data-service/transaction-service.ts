@@ -16,10 +16,21 @@ export class TransactionManager {
     }
 
     getTransactionById(userId: string, transactionId: string) : Observable<ITransaction> { 
-        //return this.angularFireStore.collection<any>('transaction-history').doc(userId).collection<ITransaction>('transactions').doc<ITransaction>(transactionId).valueChanges();
-        return null;
+        return this.angularFireStore.doc<ITransaction>(`transaction-history/${userId}/transactions/${transactionId}`).valueChanges();
+        /*return this.angularFireStore.collection<any>('transaction-history').m,,gr.ehjkfjkwdhsVIPhu
+        return this.angularFireStore.collection<any>('transaction-history').doc(userId)
+        .collection<ITransaction>('transactions').doc(transactionId).valueChanges();*/
     }
-    addTransaction(transaction: any) : string { return null; }
+
+    addTransaction(transaction: ITransaction) : string { 
+        transaction.createdAt = new Date();
+        transaction.userId = this.authService.afAuth.auth.currentUser.uid;
+        transaction.id = this.angularFireStore.createId();
+        transaction.referenceNumber = transaction.id;
+        this.angularFireStore.collection('transaction-history').doc(transaction.userId).collection('transactions')
+        .doc(this.angularFireStore.createId()).set(transaction).then(() => console.log('Transaction Uploaded!')).catch(()=> console.log('Transaction Failed!'));
+        return transaction.id; 
+    }
     cancelTransaction(transactionId: string) : void {}
 
 }

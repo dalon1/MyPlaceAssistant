@@ -3,9 +3,11 @@ import { ITransaction } from "../../../models/payment/ITransaction";
 import { IUser } from "../../../models/IUser";
 import { AuthService } from '../../../providers/auth-service/auth-service';
 import { IPlace } from "../../../models/place/IPlace";
-import { NavController } from "ionic-angular/navigation/nav-controller";
+import { NavController, App } from "ionic-angular";
 import { TransactionManager } from "../../../providers/data-service/transaction-service";
 import { LocalSession } from "../../../providers/session/local-session";
+import { TransactionDetailsPage } from "../details/transaction-details";
+import { TransactionFormPage } from "../form/transaction-form";
 
 @Component({
     selector: 'transaction-history',
@@ -15,6 +17,7 @@ export class TransactionHistoryPage {
     transactionHistory: Array<TransactionModel>;
 
     constructor(
+        private app: App,
         private navController: NavController,
         private transactionManager: TransactionManager,
         private authManager: AuthService,
@@ -36,6 +39,15 @@ export class TransactionHistoryPage {
             });
         });
         return transactionHistory;
+    }
+
+    getDetails(transactionId: string) {
+        this.localSession.setTransactionId(transactionId);
+        this.app.getRootNav().push(TransactionDetailsPage);
+    }
+
+    addTransaction() {
+        this.app.getRootNav().push(TransactionFormPage);
     }
 }
 

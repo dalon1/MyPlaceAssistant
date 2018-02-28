@@ -1,0 +1,29 @@
+<ion-header> 
+    <ion-navbar>
+        <ion-toolbar no-border-top color="primary" *ngIf="demo != 'Title'">
+          <ion-searchbar></ion-searchbar>
+        </ion-toolbar>
+    </ion-navbar>
+ </ion-header>
+
+ <ion-content>
+    <ion-item>
+        <h1>Transaction Details</h1>
+    </ion-item>
+    <ion-item text-wrap>
+        <ion-icon name="document" item-left></ion-icon> Reference Number: {{ (transaction | async)?.referenceNumber }}
+    </ion-item>
+    <ion-item text-wrap>
+        <ion-icon name="document" item-left></ion-icon> Amount: {{ (transaction | async)?.amount }} {{ (transaction | async)?.currency }}
+    </ion-item>
+    <ion-item text-wrap>
+        <ion-icon name="document" item-left></ion-icon> Payment Method: {{ (transaction | async)?.paymentMethodId }}
+    </ion-item>
+    <ion-item text-wrap>
+        <ion-icon name="document" item-left></ion-icon> Payee: {{ (transaction | async)?.placeId}}
+    </ion-item>
+    <ion-item text-wrap>
+        <ion-icon name="document" item-left></ion-icon> Created At: {{ (transaction | async)?.createdAt | date: 'longDate' }}
+    </ion-item>
+
+ </ion-content>

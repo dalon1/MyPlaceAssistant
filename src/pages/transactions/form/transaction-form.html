@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <ion-icon name="cloud-upload" item-left></ion-icon> New Transaction
+        </ion-title>
+   </ion-navbar>
+ </ion-header>
+
+<ion-content>
+    <form 
+        [formGroup]="transactionForm"
+        (ngSubmit)="sendTransaction(transactionForm.value)">
+        <ion-item>
+                <h1>New Transaction</h1> 
+        </ion-item>
+                
+        <!-- Name -->
+        <ion-item text-wrap>
+            <ion-label stacked>Amount</ion-label>
+            <ion-input type="number" formControlName="amount" placeholder="0.00"></ion-input>
+        </ion-item>
+        
+        <!-- Payment Method -->
+        <ion-item (click)="selectPayment()">
+            <ion-icon name="arrow-forward" item-end></ion-icon>
+            <ion-label>Select Payment</ion-label>
+        </ion-item>
+        <!-- Place -->
+        <ion-item (click)="selectPayee()">
+                <ion-icon name="arrow-forward" item-end></ion-icon>
+                <ion-label>Select Payee</ion-label>
+        </ion-item>
+
+        <!-- Transaction Type --> 
+        <ion-item>
+            <ion-label stacked>Type</ion-label>
+            <ion-select formControlName="transactionType" interface="popover">
+                <ion-option *ngFor="let type of (transactionTypes | enumToArray)" [value]="type">{{ type }}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <!-- Transaction Type --> 
+        <ion-item>
+            <ion-label stacked>Memo</ion-label>
+            <ion-input formControlName="memo"></ion-input>
+        </ion-item>
+
+        
+        <button ion-button full color="primary" type="submit">Send</button>
+    </form>
+</ion-content>

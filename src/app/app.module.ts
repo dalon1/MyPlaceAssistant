@@ -38,6 +38,7 @@ import { PaymentMethodPage } from '../pages/payment-method/main/payment-method';
 //import { PaymentMethodDetailsPage } from '../pages/payment-method/details/payment-method-details';
 //import { PaymentMethodDetailsPage } from '../pages/payment-method/details/payment-method-details';
 import { PaymentMethodFormPage } from '../pages/payment-method/form/payment-method-form';
+import { PaymentMethodSelectPage } from '../pages/payment-method/select/payment-method-select';
 
 import { TransactionHistoryPage } from '../pages/transactions/main/transaction-history';
 import { TransactionDetailsPage } from '../pages/transactions/details/transaction-details';
@@ -46,6 +47,7 @@ import { TransactionFormPage } from '../pages/transactions/form/transaction-form
 import { MyPlacePage } from '../pages/myplace/main/myplace';
 import { MyPlaceDetailsPage } from '../pages/myplace/details/myplace-details';
 import { MyPlaceFormPage } from '../pages/myplace/form/myplace-form';
+import { MyPlaceSelectPage } from '../pages/myplace/select/myplace-select';
 
 
 import { Messenger } from '../pages/messenger/messenger';
@@ -72,6 +74,7 @@ import { FacilityManager } from '../providers/data-service/facility-service';
 import { TransactionManager } from '../providers/data-service/transaction-service';
 
 import { UserIdPipe } from '../utils/pipes/user-id-pipe';
+import { EnumToArray } from '../utils/pipes/enum-to-array';
 
 import { LocalSession } from '../providers/session/local-session';
 
@@ -105,16 +108,19 @@ export const firebaseConfig = {
     FilesPage,
     FileDetailPage,
     UserIdPipe,
+    EnumToArray,
     FileUpload,
     PaymentMethodPage,
    // PaymentMethodDetailsPage,
     PaymentMethodFormPage,
+    PaymentMethodSelectPage,
     TransactionHistoryPage,
     TransactionDetailsPage,
     TransactionFormPage,
     MyPlacePage,
     MyPlaceDetailsPage,
     MyPlaceFormPage,
+    MyPlaceSelectPage,
     Messenger
   ],
   imports: [
@@ -149,12 +155,14 @@ export const firebaseConfig = {
     PaymentMethodPage,
     //PaymentMethodDetailsPage,
     PaymentMethodFormPage,
+    PaymentMethodSelectPage,
     TransactionHistoryPage,
     TransactionDetailsPage,
     TransactionFormPage,
     MyPlacePage,
     MyPlaceDetailsPage,
     MyPlaceFormPage,
+    MyPlaceSelectPage,
     Messenger
   ],
   providers: [

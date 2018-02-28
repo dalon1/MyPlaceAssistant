@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AuthService } from "../auth-service/auth-service";
 import { Observable } from "rxjs/Observable";
+import { IPaymentMethod } from '../../models/payment/IPaymentMethod';
 
 @Injectable()
 export class PaymentMethodManager {
@@ -10,8 +11,14 @@ export class PaymentMethodManager {
         private authService: AuthService
     ) {}
 
-    getPaymentMethods() : Observable<any[]> { return null; }
-    getPaymentMethodById(id : string) : Observable<any> { return null; }
+    getPaymentMethods(userId: string) : Observable<IPaymentMethod[]> { 
+        return this.angularFireStore.collection<any>('payment-methods').doc(userId).collection<IPaymentMethod>('payments').valueChanges();; 
+    }
+
+    getPaymentMethodById(userId: string, paymentMethodId: string) : Observable<IPaymentMethod> { 
+        return this.angularFireStore.doc<IPaymentMethod>(`payment-methods/${userId}/payments/${paymentMethodId}`).valueChanges();
+    }
+    
     addPaymentMethod() : string { return null; }
     updatePaymentMethod(id : string) : Observable<any> { return null; }
     deletePaymentMethod(id : string ) : void {}
