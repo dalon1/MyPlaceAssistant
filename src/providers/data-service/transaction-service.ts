@@ -26,7 +26,7 @@ export class TransactionManager {
         transaction.createdAt = new Date();
         transaction.userId = this.authService.afAuth.auth.currentUser.uid;
         transaction.id = this.angularFireStore.createId();
-        transaction.referenceNumber = transaction.id;
+        transaction.referenceNumber = this.angularFireStore.createId();
         this.angularFireStore.collection('transaction-history').doc(transaction.userId).collection('transactions')
         .doc(transaction.id).set(transaction).then(() => console.log('Transaction Uploaded!')).catch(()=> console.log('Transaction Failed!'));
         return transaction.id; 

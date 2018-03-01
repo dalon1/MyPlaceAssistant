@@ -32,6 +32,8 @@ export class TransactionHistoryPage {
         console.log(this.transactionHistory);
     }
 
+    
+
     loadTransactionHistory() : Array<TransactionModel> {
         let transactionHistory : Array<TransactionModel> = new Array<TransactionModel>();
         this.transactionManager.getTransactionHistory(this.authManager.afAuth.auth.currentUser.uid).subscribe((data: Array<ITransaction>)=> {

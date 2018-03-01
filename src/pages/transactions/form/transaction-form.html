@@ -9,7 +9,7 @@
 <ion-content>
     <form 
         [formGroup]="transactionForm"
-        (ngSubmit)="sendTransaction(transactionForm.value)">
+        (ngSubmit)="sendTransactionVerification(transactionForm.value)">
                 
         <!-- Name -->
         <ion-item text-wrap>
@@ -20,12 +20,19 @@
         <!-- Payment Method -->
         <ion-item (click)="selectPayment()">
             <ion-icon name="arrow-forward" item-end></ion-icon>
-            <ion-label>Select Payment</ion-label>
+            <ion-label>Select Payment (Pending)</ion-label>
         </ion-item>
         <!-- Place -->
         <ion-item (click)="selectPayee()">
                 <ion-icon name="arrow-forward" item-end></ion-icon>
-                <ion-label>Select Payee</ion-label>
+                <ion-label>Select Payee (Pending)</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Payment Method</ion-label>
+            <ion-select formControlName="paymentMethod">
+                <ion-option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod">{{ paymentMethod.cardNumber | maskCardNumber }}</ion-option>
+            </ion-select>
         </ion-item>
 
         <!-- Transaction Type --> 
@@ -43,6 +50,6 @@
         </ion-item>
 
         
-        <button ion-button full color="primary" type="submit">Send</button>
+        <button ion-button full color="primary" type="submit" [disabled]="!transactionForm.valid">Send</button>
     </form>
 </ion-content>
