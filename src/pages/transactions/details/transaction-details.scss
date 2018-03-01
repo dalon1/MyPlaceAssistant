@@ -1,0 +1,29 @@
+transaction-details {
+    .center {
+        text-align: center;
+    }
+    .title-holder-reservation {
+        @extend .center;
+        background-color: cadetblue;
+        
+    }
+
+    .title-holder-maintenance {
+        @extend .center;
+        background-color: greenyellow;
+    }
+
+    .title-holder-other {
+        @extend .center;
+        background-color: orange;
+    }
+
+    .title-holder-penalty {
+        @extend .center;
+        background-color: red;
+    }
+
+    .put-right {
+        text-align: right;
+    }
+}

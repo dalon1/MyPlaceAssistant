@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TransactionModel } from '../../models/view-models/TransactionModel';
 
 
 @Injectable()
@@ -9,8 +10,17 @@ export class LocalSession {
     private profileId: string;
     private selectedPayment: string;
     private selectedPayee: string;
+    private transactionModel: TransactionModel;
 
     constructor() {}
+
+    public setTransactionModel(model: TransactionModel) : void {
+        this.transactionModel = model;
+    }
+
+    public getTransactionModel() : TransactionModel {
+        return this.transactionModel;
+    }
 
     public setTransactionId(id: string) : void {
         this.transactionId = id;

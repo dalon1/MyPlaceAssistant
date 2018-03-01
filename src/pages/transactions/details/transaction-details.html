@@ -7,20 +7,27 @@
  </ion-header>
 
  <ion-content>
-    <ion-item text-wrap>
-        <ion-icon name="document" item-left></ion-icon> Reference Number: {{ (transaction | async)?.referenceNumber }}
-    </ion-item>
-    <ion-item text-wrap>
-        <ion-icon name="document" item-left></ion-icon> Amount: {{ (transaction | async)?.amount }} {{ (transaction | async)?.currency }}
-    </ion-item>
-    <ion-item text-wrap>
-        <ion-icon name="document" item-left></ion-icon> Payment Method: {{ (transaction | async)?.paymentMethodId }}
-    </ion-item>
-    <ion-item text-wrap>
-        <ion-icon name="document" item-left></ion-icon> Payee: {{ (transaction | async)?.placeId}}
-    </ion-item>
-    <ion-item text-wrap>
-        <ion-icon name="document" item-left></ion-icon> Created At: {{ (transaction | async)?.createdAt | date: 'longDate' }}
-    </ion-item>
+    <ion-item [ngClass]="{'title-holder-reservation': transactionModel.transaction.transactionType === 'Reservation', 
+        'title-holder-maintenance': transactionModel.transaction.transactionType === 'Maintenance',
+        'title-holder-other': transactionModel.transaction.transactionType === 'Other',
+        'title-holder-penalty': transactionModel.transaction.transactionType === 'Penalty'}">
+            <h5>{{ transactionModel.transaction.transactionType }}</h5>
+            <h1>${{ transactionModel.transaction.amount | number: '1.2-2' }} <small>{{ transactionModel.transaction.currency }}</small></h1>
+            <h4 class="put-right"><small>Ref# {{ transactionModel.transaction.id | maskRefNumber }}</small></h4>
+        </ion-item>
 
+        <!-- body -->
+        <ion-item>
+            <ion-icon name="wine" item-left large ></ion-icon>
+            <h2>Institute of Fine Cocktails</h2>
+            <p>14 S. Hop Avenue, Madison, WI 53703</p>
+        </ion-item>
+
+        <!-- footer -->
+        <ion-item>
+            <span item-left>
+                <ion-icon name="card"></ion-icon> {{ transactionModel.paymentMethod.cardNumber | maskCardNumber }}
+            </span>
+            <span item-end>{{ transactionModel.transaction.createdAt | date: 'short' }}</span>
+        </ion-item>
  </ion-content>

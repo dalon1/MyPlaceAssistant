@@ -47,8 +47,8 @@ export class TransactionHistoryPage {
         return transactionHistory;
     }
 
-    getDetails(transactionId: string) {
-        this.localSession.setTransactionId(transactionId);
+    getDetails(model: TransactionModel) {
+        this.localSession.setTransactionModel(model);
         this.app.getRootNav().push(TransactionDetailsPage);
     }
 
