@@ -8,6 +8,8 @@ import { TransactionManager } from "../../../providers/data-service/transaction-
 import { LocalSession } from "../../../providers/session/local-session";
 import { TransactionDetailsPage } from "../details/transaction-details";
 import { TransactionFormPage } from "../form/transaction-form";
+import { PaymentMethodManager } from "../../../providers/data-service/payment-method-service";
+import { IPaymentMethod } from "../../../models/payment/IPaymentMethod";
 
 @Component({
     selector: 'transaction-history',
@@ -20,6 +22,7 @@ export class TransactionHistoryPage {
         private app: App,
         private navController: NavController,
         private transactionManager: TransactionManager,
+        private paymentMethodManager: PaymentMethodManager,
         private authManager: AuthService,
         private localSession: LocalSession
     ) {}
@@ -35,7 +38,10 @@ export class TransactionHistoryPage {
             data.forEach((transaction : ITransaction) => {
                 let user: IUser  = null;
                 let place: IPlace = null;
-                transactionHistory.push(new TransactionModel(transaction, user, place));
+                let paymentMethod = this.paymentMethodManager.getPaymentMethodById(this.authManager.afAuth.auth.currentUser.uid, transaction.paymentMethodId)
+                .subscribe((paymentMethod: IPaymentMethod) => {
+                    transactionHistory.push(new TransactionModel(transaction, user, place, paymentMethod));
+                });
             });
         });
         return transactionHistory;
@@ -55,6 +61,7 @@ class TransactionModel {
     constructor(
         public transaction : ITransaction,
         public user: IUser,
-        public place: IPlace
+        public place: IPlace,
+        public paymentMethod: IPaymentMethod
     ){}
 }

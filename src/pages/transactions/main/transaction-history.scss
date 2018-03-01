@@ -17,4 +17,13 @@ transaction-history {
         @extend .center;
         background-color: orange;
     }
+
+    .title-holder-penalty {
+        @extend .center;
+        background-color: red;
+    }
+
+    .put-right {
+        text-align: right;
+    }
 }

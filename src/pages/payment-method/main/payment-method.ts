@@ -1,25 +1,27 @@
 import { Component } from "@angular/core";
 import { PaymentMethodManager } from "../../../providers/data-service/payment-method-service";
+import { NavController, App } from 'ionic-angular';
 import { ViewController } from "ionic-angular/navigation/view-controller";
 import { IPaymentMethod } from "../../../models/payment/IPaymentMethod";
 import { AuthService } from "../../../providers/auth-service/auth-service";
+import { PaymentMethodFormPage } from '../form/payment-method-form';
 
 @Component({
     selector: 'payment-method-page',
     templateUrl: 'payment-method.html'
 })
 export class PaymentMethodPage {
-    paymentMethods: Array<PaymentMethodModel>;
+    paymentMethodModels: Array<PaymentMethodModel>;
 
     constructor(
         private paymentMethodManager: PaymentMethodManager,
         private viewController: ViewController,
-        private authManager: AuthService
+        private authManager: AuthService,
+        private app: App
     ) {}
 
     ngOnInit() {
-        this.paymentMethods = this.loadPaymentMethods();
-        console.log(this.paymentMethods);
+        this.paymentMethodModels = this.loadPaymentMethods();
     }
 
     dismiss() {
@@ -34,6 +36,10 @@ export class PaymentMethodPage {
             });
         });
         return paymentMethods;
+    }
+
+    addPaymentMethod() {
+        this.app.getRootNav().push(PaymentMethodFormPage);
     }
 }
 

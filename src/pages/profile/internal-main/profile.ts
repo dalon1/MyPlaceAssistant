@@ -65,7 +65,7 @@ export class Profile {
   }
 
   updatePaymentMethod() {
-    this.modalController.create(PaymentMethodPage).present();
+    this.app.getRootNav().push(PaymentMethodPage);
   }
 
   updateMyPlaces() {

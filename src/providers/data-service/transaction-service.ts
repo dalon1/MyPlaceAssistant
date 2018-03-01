@@ -28,7 +28,7 @@ export class TransactionManager {
         transaction.id = this.angularFireStore.createId();
         transaction.referenceNumber = transaction.id;
         this.angularFireStore.collection('transaction-history').doc(transaction.userId).collection('transactions')
-        .doc(this.angularFireStore.createId()).set(transaction).then(() => console.log('Transaction Uploaded!')).catch(()=> console.log('Transaction Failed!'));
+        .doc(transaction.id).set(transaction).then(() => console.log('Transaction Uploaded!')).catch(()=> console.log('Transaction Failed!'));
         return transaction.id; 
     }
     cancelTransaction(transactionId: string) : void {}

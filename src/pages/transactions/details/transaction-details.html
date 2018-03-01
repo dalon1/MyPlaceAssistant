@@ -1,15 +1,12 @@
-<ion-header> 
+<ion-header>
     <ion-navbar>
-        <ion-toolbar no-border-top color="primary" *ngIf="demo != 'Title'">
-          <ion-searchbar></ion-searchbar>
-        </ion-toolbar>
-    </ion-navbar>
+        <ion-title>
+            <ion-icon name="information-circle" item-left></ion-icon> Transaction Details
+        </ion-title>
+   </ion-navbar>
  </ion-header>
 
  <ion-content>
-    <ion-item>
-        <h1>Transaction Details</h1>
-    </ion-item>
     <ion-item text-wrap>
         <ion-icon name="document" item-left></ion-icon> Reference Number: {{ (transaction | async)?.referenceNumber }}
     </ion-item>

@@ -10,14 +10,11 @@
     <form 
         [formGroup]="transactionForm"
         (ngSubmit)="sendTransaction(transactionForm.value)">
-        <ion-item>
-                <h1>New Transaction</h1> 
-        </ion-item>
                 
         <!-- Name -->
         <ion-item text-wrap>
-            <ion-label stacked>Amount</ion-label>
-            <ion-input type="number" formControlName="amount" placeholder="0.00"></ion-input>
+            <ion-label stacked>Amount (USD)</ion-label>
+            <ion-input type="number" formControlName="amount" placeholder="0.00" style="font-size:6rem; text-align: center;"></ion-input>
         </ion-item>
         
         <!-- Payment Method -->

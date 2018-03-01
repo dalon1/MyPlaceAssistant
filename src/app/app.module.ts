@@ -75,6 +75,8 @@ import { TransactionManager } from '../providers/data-service/transaction-servic
 
 import { UserIdPipe } from '../utils/pipes/user-id-pipe';
 import { EnumToArray } from '../utils/pipes/enum-to-array';
+import { MaskCardNumber } from '../utils/pipes/mask-card-number';
+import { MaskRefNumber } from '../utils/pipes/mask-ref-number';
 
 import { LocalSession } from '../providers/session/local-session';
 
@@ -109,6 +111,8 @@ export const firebaseConfig = {
     FileDetailPage,
     UserIdPipe,
     EnumToArray,
+    MaskCardNumber,
+    MaskRefNumber,
     FileUpload,
     PaymentMethodPage,
    // PaymentMethodDetailsPage,

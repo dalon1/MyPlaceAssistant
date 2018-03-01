@@ -20,9 +20,11 @@
     <ion-card *ngFor="let model of transactionHistory" (click)="getDetails(model.transaction.id)">
         <ion-item [ngClass]="{'title-holder-reservation': model.transaction.transactionType === 'Reservation', 
         'title-holder-maintenance': model.transaction.transactionType === 'Maintenance',
-        'title-holder-other': model.transaction.transactionType === 'Other'}">
+        'title-holder-other': model.transaction.transactionType === 'Other',
+        'title-holder-penalty': model.transaction.transactionType === 'Penalty'}">
             <h5>{{ model.transaction.transactionType }}</h5>
             <h1>${{ model.transaction.amount | number: '1.2-2' }} <small>{{ model.transaction.currency }}</small></h1>
+            <h4 class="put-right"><small>Ref# {{ model.transaction.id | maskRefNumber }}</small></h4>
         </ion-item>
 
         <!-- body -->
@@ -35,7 +37,7 @@
         <!-- footer -->
         <ion-item>
             <span item-left>
-                <ion-icon name="card"></ion-icon> *** 1010
+                <ion-icon name="card"></ion-icon> {{ model.paymentMethod.cardNumber | maskCardNumber }}
             </span>
             <span item-end>{{ model.transaction.createdAt | date: 'short' }}</span>
         </ion-item>
