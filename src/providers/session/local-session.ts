@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TransactionModel } from '../../models/view-models/TransactionModel';
+import { SignUpModel } from '../../models/form-models/SignUpModel';
 
 
 @Injectable()
@@ -11,8 +12,17 @@ export class LocalSession {
     private selectedPayment: string;
     private selectedPayee: string;
     private transactionModel: TransactionModel;
+    private signUpModel: SignUpModel; // For the Sign Up Form 
 
     constructor() {}
+
+    public setSignUpModel(model: SignUpModel) : void {
+        this.signUpModel = model;
+    }
+
+    public getSignUpModel() : SignUpModel {
+        return this.signUpModel;
+    }
 
     public setTransactionModel(model: TransactionModel) : void {
         this.transactionModel = model;

@@ -2,7 +2,7 @@ import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Login } from '../login/login';
-import { Signup } from '../signup/signup';
+import { Signup } from '../signup/user-form/signup';
 import { AuthService } from '../../providers/auth-service/auth-service';
 
 

@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <ion-icon name="help" item-left></ion-icon> Add Payment Method
+        </ion-title>
+   </ion-navbar>
+ </ion-header>
+
+<ion-content>
+    <!-- Update Profile Form -->
+    <form [formGroup]="paymentMethodForm" (ngSubmit)="addPaymentMethod(paymentMethodForm.value)">
+        <!-- CardNumber -->
+        <ion-item>
+            <ion-label stacked>Card Number</ion-label>
+            <ion-input formControlName="cardNumber"></ion-input>
+        </ion-item>
+
+        <!-- Card Holder Name -->
+        <ion-item>
+            <ion-label stacked>Card Holder Name</ion-label>
+            <ion-input formControlName="cardHolderName" [value]="signUpModel.user.name"></ion-input>
+        </ion-item>
+
+        <!-- Expiration Date -->
+        <ion-item>
+            <ion-label stacked>Expiration Date</ion-label>
+            <ion-input formControlName="expirationDate"></ion-input>
+        </ion-item>
+
+        <!-- Code -->
+        <ion-item>
+            <ion-label stacked>Code</ion-label>
+            <ion-input formControlName="code"></ion-input>
+        </ion-item>
+
+        <button ion-button full color="primary" type="submit" [disabled]="!paymentMethodForm.valid">3 out of 3</button>
+    </form>
+</ion-content>

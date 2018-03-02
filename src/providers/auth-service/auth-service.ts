@@ -3,6 +3,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { IUser } from '../../models/IUser';
 import { Role } from '../../models/Role';
+import { SignUpModel } from '../../models/form-models/SignUpModel';
+import { PaymentMethodManager } from '../data-service/payment-method-service';
 
 
 
@@ -12,7 +14,9 @@ export class AuthService {
 
   constructor(
     public afAuth: AngularFireAuth,
-    public afFirestore: AngularFirestore) { }
+    public afFirestore: AngularFirestore,
+    //private paymentMethodManager: PaymentMethodManager
+  ) { }
 
   loginUser(newEmail?: string, newPassword?: string): Promise<any> {
     if (typeof newEmail !== 'undefined' && typeof newPassword !== 'undefined')
@@ -29,19 +33,14 @@ export class AuthService {
     return this.afAuth.auth.signOut();
   }
 
-  signupUser(newEmail: string, newPassword: string, name: string, role?:Role): Promise<IUser> {
-    let newUser: Promise<IUser> = this.afAuth.auth.createUserWithEmailAndPassword(newEmail, newPassword);
+  signUpUser(user: IUser, password: string): Promise<IUser> {
+    let newUser: Promise<IUser> = this.afAuth.auth.createUserWithEmailAndPassword(user.email, password);
     newUser
       .then(() => {
+        user.id = this.afAuth.auth.currentUser.uid;
         const usersCollection = this.afFirestore.collection<IUser>('users').doc(this.afAuth.auth.currentUser.uid);
-        usersCollection.set({
-          id: this.afAuth.auth.currentUser.uid,
-          name: name,
-          email: newEmail,
-          role: role ? role:Role.Member
-        })
+        usersCollection.set(user);
       });
     return newUser;
   }
-
 }

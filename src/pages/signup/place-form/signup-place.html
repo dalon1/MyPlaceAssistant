@@ -1,0 +1,16 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>
+        Select Place
+      </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-item>
+        <h1>Country: <strong>{{ signUpModel.user.country }}</strong></h1>
+    </ion-item>
+
+    <button ion-button block (click)="addPlace()">
+        2 out 3 <ion-icon name="arrow-forward" item-end></ion-icon>
+    </button>
+</ion-content>  

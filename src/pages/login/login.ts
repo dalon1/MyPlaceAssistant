@@ -10,7 +10,7 @@ import { AuthService } from '../../providers/auth-service/auth-service';
 import { EmailValidator } from '../../utils/validators/email';
 import { TabsPage } from '../tabs/tabs';
 import { ResetPassword } from '../reset-password/reset-password';
-import { Signup } from '../signup/signup';
+import { Signup } from '../signup/user-form/signup';
 
 @Component({
   selector: 'page-login',

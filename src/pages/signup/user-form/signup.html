@@ -7,8 +7,8 @@
 </ion-header>
 
 
-<ion-content padding>
-  <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
+<ion-content>
+  <form [formGroup]="signupForm" (submit)="signUpUserInfo(signupForm.value)" novalidate>
 
       <ion-item>
           <ion-label stacked>Name</ion-label>
@@ -37,8 +37,16 @@
       <p>Your password needs more than 6 characters.</p>
     </ion-item>
 
-    <button ion-button block type="submit">
-      Create an Account
+    <!-- Country -->
+    <ion-item text-wrap>
+      <ion-label stacked>Country</ion-label>
+      <ion-select formControlName="country" placeholder="Select Country">
+          <ion-option *ngFor="let country of (countries | async)" [value]="country?.name">{{country?.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <button ion-button block type="submit" [disabled]="!signupForm.valid">
+      1 out 3 <ion-icon name="arrow-forward" item-end></ion-icon>
     </button>
 
   </form>

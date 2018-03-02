@@ -18,7 +18,6 @@ import { HttpModule } from "@angular/http";
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { BookingPage } from '../pages/booking/main/booking';
-import { Signup } from '../pages/signup/signup';
 import { Login } from '../pages/login/login';
 import { Welcome } from '../pages/welcome/welcome';
 import { News } from '../pages/news/news';
@@ -34,6 +33,10 @@ import { FileDetailPage } from '../pages/file-details/file-details';
 import { FileUpload } from '../pages/file-upload/file-upload';
 
 // My Place Assistant: New Pages >>
+import { Signup } from '../pages/signup/user-form/signup';
+import { SignUpPaymentFormPage } from '../pages/signup/payment-form/signup-payment';
+import { SignUpPlaceFormPage } from '../pages/signup/place-form/signup-place';
+
 import { PaymentMethodPage } from '../pages/payment-method/main/payment-method';
 //import { PaymentMethodDetailsPage } from '../pages/payment-method/details/payment-method-details';
 //import { PaymentMethodDetailsPage } from '../pages/payment-method/details/payment-method-details';
@@ -97,6 +100,8 @@ export const firebaseConfig = {
     TabsPage,
     BookingPage,
     Signup,
+    SignUpPlaceFormPage,
+    SignUpPaymentFormPage,
     Login,
     Welcome,
     News,
@@ -143,6 +148,8 @@ export const firebaseConfig = {
     TabsPage,
     BookingPage, 
     Signup,
+    SignUpPlaceFormPage,
+    SignUpPaymentFormPage,
     Login, 
     Welcome,
     News,

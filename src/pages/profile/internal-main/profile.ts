@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { App, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AuthService } from '../../../providers/auth-service/auth-service';
 import { Welcome } from '../../welcome/welcome';
-import { Signup } from '../../signup/signup';
+import { Signup } from '../../signup/user-form/signup';
 import { ProfileForm } from '../form/profile-form';
 import { PaymentMethodPage } from '../../payment-method/main/payment-method';
 import { MyPlacePage } from '../../myplace/main/myplace';
