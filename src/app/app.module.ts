@@ -72,7 +72,7 @@ import { CountryManager } from '../providers/data-service/country-service';
 // My Place Assistant : New Providers >>
 import { BookingManager } from '../providers/data-service/booking-service';
 import { PaymentMethodManager } from '../providers/data-service/payment-method-service';
-import { BuildingManager } from '../providers/data-service/building-service';
+import { PlaceManager } from '../providers/data-service/place-service';
 import { FacilityManager } from '../providers/data-service/facility-service';
 import { TransactionManager } from '../providers/data-service/transaction-service';
 
@@ -191,7 +191,7 @@ export const firebaseConfig = {
     NewsManager,
     CountryManager,
     LocalSession,
-    BuildingManager,
+    PlaceManager,
     FacilityManager,
     BookingManager, 
     PaymentMethodManager,

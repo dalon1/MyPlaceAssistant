@@ -10,7 +10,38 @@
         <h1>Country: <strong>{{ signUpModel.user.country }}</strong></h1>
     </ion-item>
 
-    <button ion-button block (click)="addPlace()">
+    <ion-list>        
+        <ion-item *ngFor="let model of placeModels" (click)="selectPlace(model)">
+            <ion-avatar item-start>
+               <img src="https://avatars.io/static/default_128.jpg">
+            </ion-avatar>
+            <ion-icon name="arrow-forward" item-end></ion-icon>
+            <h2>{{ model.place.name }}</h2>
+            <p>{{ model.place.address1 }}, {{ model.place.city }}, {{ model.place.province }} {{ model.place.postalCode }}</p>
+        </ion-item>     
+    </ion-list>
+
+    <ion-item *ngIf="placeSelected !== undefined" (click)="unselectPlace()">
+        <ion-avatar item-start>
+           <img src="https://avatars.io/static/default_128.jpg">
+        </ion-avatar>
+        <ion-icon name="checkmark-circle" item-end></ion-icon>
+        <h2>{{ placeSelected.place.name }}</h2>
+        <p>{{ placeSelected.place.address1 }}, {{ placeSelected.place.city }}, {{ placeSelected.place.province }} {{ placeSelected.place.postalCode }}</p>
+    </ion-item>     
+
+    <form [formGroup]="placeForm" (ngSubmit)="addPlace(placeForm.value)">
+    <ion-item *ngIf="placeSelected !== undefined">
+        <ion-label stacked>Unit/Apt#</ion-label>
+        <ion-input formControlName="unit"></ion-input>
+    </ion-item>
+
+    <ion-item hidden>
+        <ion-input id="inputPlaceId" formControlName="id" [value]="placeSelected?.place?.id"></ion-input>
+    </ion-item>
+
+    <button ion-button block type="submit" [disabled]="!placeForm.valid">
         2 out 3 <ion-icon name="arrow-forward" item-end></ion-icon>
     </button>
+    </form>
 </ion-content>  

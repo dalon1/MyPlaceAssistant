@@ -2,11 +2,12 @@ import { ICountry } from "./ICountry";
 import { Role } from "./Role";
 
 export interface IUser {
-    id: string;
+    id: string,
     name: string, 
     email:string,  
     avatarUrl?:string, 
     description:string,
-    country?: ICountry;
-    role:Role;
+    //country?: ICountry;
+    country: string,
+    role:Role
 }

@@ -7,6 +7,7 @@ import { TabsPage } from "../../tabs/tabs";
 import { PaymentMethodManager } from "../../../providers/data-service/payment-method-service";
 import { SignUpModel } from "../../../models/form-models/SignUpModel";
 import { IPaymentMethod } from "../../../models/payment/IPaymentMethod";
+import { PlaceManager } from "../../../providers/data-service/place-service";
 
 @Component({
     selector: 'signup-payment',
@@ -24,7 +25,8 @@ export class SignUpPaymentFormPage {
         private navController: NavController,
         private alertController: AlertController,
         private loadingController: LoadingController,
-        private paymentMethodManager: PaymentMethodManager
+        private paymentMethodManager: PaymentMethodManager,
+        private placeManager: PlaceManager
     ) {}
 
     ngOnInit() {
@@ -54,6 +56,9 @@ export class SignUpPaymentFormPage {
     signUpUserFullInfo(model: SignUpModel) {
         this.authData.signUpUser(model.user, model.password)
         .then((user) => {
+            // adding selected place to user here
+            this.placeManager.addPlaceToUser(this.authData.afAuth.auth.currentUser.uid, model.place);
+            // adding payment method here
             this.paymentMethodManager.addPaymentMethod(model.paymentMethod);
             this.navController.setRoot(TabsPage);
         }, (error) => {
