@@ -15,31 +15,28 @@
       
       
 <ion-content>
-        <ion-card class="adv-map">
+        <ion-card *ngFor="let model of myPlaceModels" class="adv-map">
                 <div style="position: relative">
                   <img src="https://developers.google.com/maps/solutions/images/storelocator_clothing.png">
                   <ion-fab right top>
-                    <button ion-fab class="fab-map">
+                    <button ion-fab mini class="fab-map">
                       <ion-icon name='pin'></ion-icon>
                     </button>
                   </ion-fab>
                 </div>
                 <ion-item>
-                  <ion-icon color="subtle" large item-start name='football'></ion-icon>
-                  <h2>Museum of Football</h2>
-                  <p>11 N. Way St, Madison, WI 53703</p>
-                </ion-item>
-                <ion-item>
-                  <ion-icon color="subtle" large item-start name='wine'></ion-icon>
-                  <h2>Institute of Fine Cocktails</h2>
-                  <p>14 S. Hop Avenue, Madison, WI 53703</p>
+                  <ion-avatar large item-start>
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Toronto-Dominion_Bank_logo.svg/400px-Toronto-Dominion_Bank_logo.svg.png">
+                  </ion-avatar>
+                  <h2>{{ model.place.name}}, {{ model.place.unit }} <!--<small><span color="secondary">(Unit/Apt#)</span></small>--></h2>
+                  <h4>{{ model.place.address1 }}</h4>
+                  <p>{{ model.place.city }},  {{ model.place.province }}, {{ model.place.postalCode }}</p>
                 </ion-item>
                 <ion-item actions>
-                  <span ion-text item-start color="secondary" class="item-bold">18 min</span>
-                  <span ion-text item-start color="subtle">(2.6 mi)</span>
-                  <button ion-button color="primary" clear item-end icon-start>
+                  <span ion-text item-start color="secondary" class="item-bold">{{ model.place.country }}</span>
+                  <button ion-button color="primary" outline item-end icon-start>
                     <ion-icon name='navigate'></ion-icon>
-                    Start
+                    Open in Maps
                   </button>
                 </ion-item>
               
