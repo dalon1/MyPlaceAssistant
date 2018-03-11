@@ -10,5 +10,7 @@ export interface ITransaction {
     currency: string,
     createdAt: Date,
     transactionType: TransactionType,
-    memo: string
+    memo: string,
+    country: string, // temporal -- refactor until better solution comes up
+    unit: string // temporal -- refactor until better solution comes up
 }

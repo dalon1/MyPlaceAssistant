@@ -10,6 +10,7 @@ import { TransactionDetailsPage } from "../details/transaction-details";
 import { TransactionFormPage } from "../form/transaction-form";
 import { PaymentMethodManager } from "../../../providers/data-service/payment-method-service";
 import { IPaymentMethod } from "../../../models/payment/IPaymentMethod";
+import { PlaceManager } from "../../../providers/data-service/place-service";
 
 @Component({
     selector: 'transaction-history',
@@ -24,6 +25,7 @@ export class TransactionHistoryPage {
         private transactionManager: TransactionManager,
         private paymentMethodManager: PaymentMethodManager,
         private authManager: AuthService,
+        private placeManager: PlaceManager,
         private localSession: LocalSession
     ) {}
     
@@ -39,10 +41,11 @@ export class TransactionHistoryPage {
         this.transactionManager.getTransactionHistory(this.authManager.afAuth.auth.currentUser.uid).subscribe((data: Array<ITransaction>)=> {
             data.forEach((transaction : ITransaction) => {
                 let user: IUser  = null;
-                let place: IPlace = null;
-                let paymentMethod = this.paymentMethodManager.getPaymentMethodById(this.authManager.afAuth.auth.currentUser.uid, transaction.paymentMethodId)
-                .subscribe((paymentMethod: IPaymentMethod) => {
-                    transactionHistory.push(new TransactionModel(transaction, user, place, paymentMethod));
+                let place = this.placeManager.getPlaceById(transaction.country, transaction.placeId).subscribe((place : IPlace) => {
+                    place.unit = transaction.unit;
+                    let paymentMethod = this.paymentMethodManager.getPaymentMethodById(this.authManager.afAuth.auth.currentUser.uid, transaction.paymentMethodId).subscribe((paymentMethod: IPaymentMethod) => {
+                        transactionHistory.push(new TransactionModel(transaction, user, place, paymentMethod));
+                    });
                 });
             });
         });

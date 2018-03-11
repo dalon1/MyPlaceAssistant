@@ -17,10 +17,14 @@
         </ion-item>
 
         <!-- body -->
-        <ion-item>
-            <ion-icon name="wine" item-left large ></ion-icon>
-            <h2>Institute of Fine Cocktails</h2>
-            <p>14 S. Hop Avenue, Madison, WI 53703</p>
+        <ion-item text-wrap>
+                <ion-avatar large item-start>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Toronto-Dominion_Bank_logo.svg/400px-Toronto-Dominion_Bank_logo.svg.png">
+                </ion-avatar>
+                <h2>{{ transactionModel.place.name}}, {{ transactionModel.place.unit }} <!--<small><span color="secondary">(Unit/Apt#)</span></small>--></h2>
+                <h4>{{ transactionModel.place.address1 }}</h4>
+                <p>{{ transactionModel.place.city }},  {{ transactionModel.place.province }}, {{ transactionModel.place.postalCode }}</p>
+                <p>{{ transactionModel.place.country }}</p>
         </ion-item>
 
         <!-- footer -->

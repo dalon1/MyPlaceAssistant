@@ -115,6 +115,8 @@ export class TransactionFormPage {
                             referenceNumber: null,
                             userId: null,
                             placeId: transactionForm.place.id,
+                            unit: transactionForm.place.unit, // Refactor when better solution solution comes up
+                            country: transactionForm.place.country, // Refactor until better solution comes up
                             createdAt: null,
                             amount: transactionForm.amount as number,
                             currency: transactionForm.currency,

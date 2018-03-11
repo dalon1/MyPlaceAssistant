@@ -29,9 +29,12 @@
 
         <!-- body -->
         <ion-item>
-            <ion-icon name="wine" item-left large ></ion-icon>
-            <h2>Institute of Fine Cocktails</h2>
-            <p>14 S. Hop Avenue, Madison, WI 53703</p>
+                <ion-avatar large item-start>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Toronto-Dominion_Bank_logo.svg/400px-Toronto-Dominion_Bank_logo.svg.png">
+                </ion-avatar>
+                <h2>{{ model.place.name}}, {{ model.place.unit }} <!--<small><span color="secondary">(Unit/Apt#)</span></small>--></h2>
+                <h4>{{ model.place.address1 }}</h4>
+                <p>{{ model.place.city }},  {{ model.place.province }}, {{ model.place.postalCode }}</p>
         </ion-item>
 
         <!-- footer -->
