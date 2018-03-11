@@ -17,69 +17,73 @@
       
       <ion-content>
       
-        <ion-item>
-            <div class="center">
-                <!--<img class="profile-picture" [src]="picturePath">-->
-                <img class="profile-picture" src="http://www.coll-leclerc.com/wp-content/uploads/2014/05/108rgb-150x150.jpg">
-            </div>
-            <div style="text-align:center">
-                <p class="document-title">Onyx PH</p>
-                <p>El Cangrejo, Calle Jose Fabregas,</p>
-                <p>Ciudad de Panama, Panama <ion-icon name="navigate"></ion-icon></p>
-            </div>
-        </ion-item>
+        <!-- Place List -->
+        <ion-list *ngIf="myPlaceSelected === undefined">
+            <ion-list-header>
+                Select Place
+            </ion-list-header>
+            <ion-item *ngFor="let model of myPlaces" (click)="selectPlace(model)">
+                  <ion-avatar large item-start>
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Toronto-Dominion_Bank_logo.svg/400px-Toronto-Dominion_Bank_logo.svg.png">
+                  </ion-avatar>
+                  <ion-icon name="arrow-forward" item-end></ion-icon>
+                  <h2>{{ model.place.name}}, {{ model.place.unit }} <!--<small><span color="secondary">(Unit/Apt#)</span></small>--></h2>
+                  <h4>{{ model.place.address1 }}</h4>
+                  <p>{{ model.place.city }},  {{ model.place.province }}, {{ model.place.postalCode }}</p>
+                <ion-badge>{{ model.place.country }}</ion-badge>    
+            </ion-item>
+        </ion-list>
 
-        <ion-item>
+        <!-- selected place -->
+        <ion-card class="adv-map" *ngIf="myPlaceSelected !== undefined">
+            <div style="position: relative">
+              <img src="https://residences.housing.queensu.ca/wp-content/uploads/2016/06/Brant-House-exterior-1b-768x548.jpg">
+              <ion-fab right top>
+                <button ion-fab mini class="fab-map" style="background-color:green">
+                  <ion-icon large name="checkmark"></ion-icon>
+                </button>
+              </ion-fab>
+            </div>
+            <ion-item>
+              <ion-avatar large item-start>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Toronto-Dominion_Bank_logo.svg/400px-Toronto-Dominion_Bank_logo.svg.png">
+              </ion-avatar>
+              <h2>{{ myPlaceSelected.place.name}}, {{ myPlaceSelected.place.unit }} <!--<small><span color="secondary">(Unit/Apt#)</span></small>--></h2>
+              <h4>{{ myPlaceSelected.place.address1 }}</h4>
+              <p>{{ myPlaceSelected.place.city }},  {{ myPlaceSelected.place.province }}, {{ myPlaceSelected.place.postalCode }}</p>
+            </ion-item>
+            <ion-item actions>
+              <span ion-text item-start color="secondary" class="item-bold">{{ myPlaceSelected.place.country }}</span>
+              <button ion-button color="primary" outline item-end icon-start>
+                <ion-icon name='navigate'></ion-icon>
+                Open in Maps
+              </button>
+            </ion-item>
+            <button class="change-place-btn" ion-button full (click)="unselectPlace()">Change Place</button>
+          </ion-card>
+
+        <ion-item *ngIf="myPlaceSelected !== undefined">
             <h1>Facilities</h1>
             <button ion-button round outline type="button" item-right>
-              All >>
+              Total {{ facilities.length }}
             </button>
         </ion-item>
 
         
 
         <!-- Use as template -->
-        <ion-card>
+        <ion-card *ngFor="let model of facilities" (click)="selectFacility(model)">
             <img src="https://fthmb.tqn.com/wVnm9LVGwf2CTEiGlNYXaaWe7fY=/960x0/filters:no_upscale()/RioOlympicsswimmingpool-GettyImages-519838356-59c09963054ad90011cf5247.jpg" />
             
             <ion-item>
                 <ion-icon name="football" item-start large></ion-icon>
-                <h2>Swimming Pool</h2>
-                <p>$200.00 USD x Hour</p>
+                <h2>{{ model.facility.name }}</h2>
+                <p>{{ model.facility.facilityType }}, {{ model.facility.cost }} USD x Hour</p>
             </ion-item>
 
             <ion-item>
-                <span item-right>Available</span>
+                <span item-right>{{ model.facility.status }}</span>
             </ion-item>
-        </ion-card>
-
-        <ion-card>
-            <img src="http://www.telegraph.co.uk/content/dam/luxury/2017/03/21/Gym_2-xlarge_trans_NvBQzQNjv4BqgsaO8O78rhmZrDxTlQBjdGcv5yZLmao6LolmWYJrXns.jpg" />
-            
-            <ion-item>
-                <ion-icon name="football" item-start large></ion-icon>
-                <h2>Gym</h2>
-                <p>$200.00 USD x Hour</p>
-            </ion-item>
-
-            <ion-item>
-                <span item-right>Soon to be Occupied</span>
-            </ion-item>
-        </ion-card>
-
-        <ion-card>
-            <img src="http://www.prudentialhotel.com/files/image/Function%20Room%201.jpg" />
-            
-            <ion-item>
-                <ion-icon name="football" item-start large></ion-icon>
-                <h2>Event Room</h2>
-                <p>$200.00USD x Hour</p>
-            </ion-item>
-
-            <ion-item>
-                <span item-right>Occupied</span>
-            </ion-item>
-        </ion-card>        
-
+        </ion-card>              
     </ion-content>
       

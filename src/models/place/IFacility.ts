@@ -6,6 +6,8 @@ export interface IFacility {
     placeId: string,
     name: string, 
     cost: number,
+    currency: string,
     facilityType: FacilityType,
-    currentStatus: Status
+    bookType: string,
+    status: Status
 }

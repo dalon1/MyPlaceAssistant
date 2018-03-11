@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, App } from 'ionic-angular';
-import { NewsAddForm } from '../../news-manage/news-add-form';
-import { NewsManager } from '../../../providers/data-service/news-service';
-import { UserManager } from '../../../providers/data-service/user-service';
 import { Observable } from 'rxjs/Observable';
-import { INews } from '../../../models/INews';
-import { IUser } from '../../../models/IUser';
-import { NewsDetailPage } from '../../../pages/news/news-details';
 import { LocalSession } from '../../../providers/session/local-session';
+import { PlaceManager } from '../../../providers/data-service/place-service';
+import { AuthService } from '../../../providers/auth-service/auth-service';
+import { IPlace } from '../../../models/place/IPlace';
+import { IUser } from '../../../models/IUser';
+import { UserManager } from '../../../providers/data-service/user-service';
+import { BookingModel } from '../../../models/view-models/BookingModel';
+import { IFacility } from '../../../models/place/IFacility';
+import { FacilityManager } from '../../../providers/data-service/facility-service';
+import { BookingFormPage } from '../form/booking-form';
 
 /**
  * Generated class for the NewsPage page.
@@ -21,49 +24,90 @@ import { LocalSession } from '../../../providers/session/local-session';
   templateUrl: 'booking.html',
 })
 export class BookingPage {
-  newsList: Array<NewsViewModel> = new Array<NewsViewModel>();
+  myPlacesBackup: Array<MyPlaceModel>;
+  myPlaces: Array<MyPlaceModel>;
+  myPlaceSelected: MyPlaceModel;
+  facilities: Array<FacilityModel>;
+  booking: BookingModel;
   
   constructor(
     private app: App,
-    private newsManager: NewsManager,
+    private authService: AuthService,
+    private placeManager: PlaceManager,
     private userManager: UserManager,
+    private facilityManager: FacilityManager,
     private localSession: LocalSession
   ) {
   }
 
   ngOnInit() {
-    this.loadNews();
+    this.myPlacesBackup = this.loadMyPlaces();
+    this.myPlaces = this.myPlacesBackup;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewsPage');
   }
 
-  goToNewsDetails(id : string) {
-    this.localSession.setNewsId(id);
-    this.app.getRootNav().push(NewsDetailPage);
-  }
-  goToNewAddFormPage() {
-    this.app.getRootNav().push(NewsAddForm);
+  
+
+  loadMyPlaces() : Array<MyPlaceModel> {
+    let places : Array<MyPlaceModel> = new Array<MyPlaceModel>();
+    this.placeManager.getPlacesByUser(this.authService.afAuth.auth.currentUser.uid).subscribe((data : Array<any>) => {
+        data.forEach((myplace : any) => {
+            // Retrieving user
+            let user = this.userManager.getProfileById(myplace.userId).subscribe((user : IUser) => {
+                // Retrieving place with its unit
+                let place = this.placeManager.getPlaceById(myplace.country, myplace.placeId).subscribe((place : IPlace) => {
+                    place.unit = myplace.unit;
+                    places.push(new MyPlaceModel(user, place));
+                });
+            });
+        });
+    });
+    return places;
   }
 
-  loadNews() {
-    this.newsManager.getNews().subscribe((data : Array<INews>) => {
-      data.forEach((news: INews) => {
-        let user = this.userManager.getProfileById(news.userId).subscribe((user: IUser) => {
-          user.avatarUrl = 'https://avatars.io/static/default_128.jpg'; 
-          news.createdAt = news.createdAt == null || news.createdAt.toString() == '' ? new Date('2018-01-01') : news.createdAt;  
-          this.newsList.push(new NewsViewModel(news, user));
-        });
+  loadFacilities(placeId: string) : Array<FacilityModel> {
+    let facilities : Array<FacilityModel> = new Array<FacilityModel>();
+    this.facilityManager.getFacilities(placeId).subscribe((data: Array<IFacility>) => {
+      data.forEach((facility : IFacility) => {
+        facilities.push(new FacilityModel(facility));
       });
     });
+    return facilities;
+  }
+
+  selectPlace(model : MyPlaceModel) {
+    this.myPlaceSelected = model;
+    this.myPlaces = new Array<MyPlaceModel>();
+    this.facilities = this.loadFacilities(this.myPlaceSelected.place.id);
+  }
+
+  unselectPlace() {
+    this.myPlaceSelected = undefined;
+    this.myPlaces = this.myPlacesBackup;
+    this.facilities = new Array<FacilityModel>();
+  }
+
+  selectFacility(model : FacilityModel) {
+    if (this.myPlaceSelected !== undefined) {
+      let bookingModel : BookingModel = 
+      new BookingModel(this.myPlaceSelected.user, this.myPlaceSelected.place, model.facility, null);
+      this.localSession.setBookingModel(bookingModel);
+      this.app.getRootNav().push(BookingFormPage);
+    }
   }
 
 }
 
-class NewsViewModel {
+class MyPlaceModel {
   constructor(
-    public news: INews,
-    public user: IUser 
-  ){}
+    public user: IUser, 
+    public place : IPlace) {}
+}
+
+class FacilityModel {
+  constructor(
+    public facility : IFacility) {}
 }

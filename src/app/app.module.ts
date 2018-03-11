@@ -17,7 +17,6 @@ import { HttpModule } from "@angular/http";
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { BookingPage } from '../pages/booking/main/booking';
 import { Login } from '../pages/login/login';
 import { Welcome } from '../pages/welcome/welcome';
 import { News } from '../pages/news/news';
@@ -52,6 +51,9 @@ import { MyPlaceDetailsPage } from '../pages/myplace/details/myplace-details';
 import { MyPlaceFormPage } from '../pages/myplace/form/myplace-form';
 import { MyPlaceSelectPage } from '../pages/myplace/select/myplace-select';
 
+import { BookingPage } from '../pages/booking/main/booking';
+import { BookingFormPage } from '../pages/booking/form/booking-form';
+import { BookingDetailsPage } from '../pages/booking/details/booking-details';
 
 import { Messenger } from '../pages/messenger/messenger';
 
@@ -98,7 +100,6 @@ export const firebaseConfig = {
     MainApp,
     HomePage,
     TabsPage,
-    BookingPage,
     Signup,
     SignUpPlaceFormPage,
     SignUpPaymentFormPage,
@@ -130,6 +131,9 @@ export const firebaseConfig = {
     MyPlaceDetailsPage,
     MyPlaceFormPage,
     MyPlaceSelectPage,
+    BookingPage,
+    BookingFormPage,
+    BookingDetailsPage,
     Messenger
   ],
   imports: [
@@ -146,7 +150,6 @@ export const firebaseConfig = {
     MainApp,
     HomePage,
     TabsPage,
-    BookingPage, 
     Signup,
     SignUpPlaceFormPage,
     SignUpPaymentFormPage,
@@ -174,6 +177,9 @@ export const firebaseConfig = {
     MyPlaceDetailsPage,
     MyPlaceFormPage,
     MyPlaceSelectPage,
+    BookingPage, 
+    BookingFormPage,
+    BookingDetailsPage,
     Messenger
   ],
   providers: [

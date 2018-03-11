@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TransactionModel } from '../../models/view-models/TransactionModel';
+import { BookingModel } from '../../models/view-models/BookingModel';
 import { SignUpModel } from '../../models/form-models/SignUpModel';
 
 
@@ -13,8 +14,17 @@ export class LocalSession {
     private selectedPayee: string;
     private transactionModel: TransactionModel;
     private signUpModel: SignUpModel; // For the Sign Up Form 
+    private bookingModel: BookingModel;
 
     constructor() {}
+
+    public setBookingModel(model: BookingModel) {
+        this.bookingModel = model;
+    }
+
+    public getBookingModel() {
+        return this.bookingModel;
+    }
 
     public setSignUpModel(model: SignUpModel) : void {
         this.signUpModel = model;
