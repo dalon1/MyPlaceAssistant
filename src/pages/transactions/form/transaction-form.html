@@ -18,21 +18,53 @@
         </ion-item>
         
         <!-- Payment Method -->
-        <ion-item (click)="selectPayment()">
+        <ion-list *ngIf="paymentMethodSelected === undefined">
+            <ion-list-header>
+                Select Payment Method
+            </ion-list-header>
+            <ion-item *ngFor="let paymentMethod of paymentMethods" (click)="selectPaymentMethod(paymentMethod)">
+            <ion-icon large item-start name="card"></ion-icon>
             <ion-icon name="arrow-forward" item-end></ion-icon>
-            <ion-label>Select Payment (Pending)</ion-label>
-        </ion-item>
-        <!-- Place -->
-        <ion-item (click)="selectPayee()">
-                <ion-icon name="arrow-forward" item-end></ion-icon>
-                <ion-label>Select Payee (Pending)</ion-label>
+            <h3>{{ paymentMethod.cardNumber | maskCardNumber }}</h3>
+            <p> {{ paymentMethod.issuingNetwork }}</p>
+            </ion-item>   
+        </ion-list>
+
+        <!-- Payment Method Details -->
+        <ion-item *ngIf="paymentMethodSelected !== undefined" (click)="unselectPaymentMethod()">
+            <ion-icon large item-start name="card"></ion-icon>
+            <ion-icon name="checkmark-circle" item-end></ion-icon>
+            <h3>{{ paymentMethodSelected.cardNumber | maskCardNumber }}</h3>
+            <p> {{ paymentMethodSelected.issuingNetwork }}</p>
         </ion-item>
 
-        <ion-item>
-            <ion-label stacked>Payment Method</ion-label>
-            <ion-select formControlName="paymentMethod">
-                <ion-option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod">{{ paymentMethod.cardNumber | maskCardNumber }}</ion-option>
-            </ion-select>
+        <!-- Place List -->
+        <ion-list *ngIf="myPlaceSelected === undefined">
+            <ion-list-header>
+                Select Payee
+            </ion-list-header>
+            <ion-item *ngFor="let place of myPlaces" (click)="selectPayee(place)">
+                  <ion-avatar large item-start>
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Toronto-Dominion_Bank_logo.svg/400px-Toronto-Dominion_Bank_logo.svg.png">
+                  </ion-avatar>
+                  <ion-icon name="arrow-forward" item-end></ion-icon>
+                  <h2>{{ place.name}}, {{ place.unit }} <!--<small><span color="secondary">(Unit/Apt#)</span></small>--></h2>
+                  <h4>{{ place.address1 }}</h4>
+                  <p>{{ place.city }},  {{ place.province }}, {{ place.postalCode }}</p>
+                <ion-badge>{{ place.country }}</ion-badge>    
+            </ion-item>
+        </ion-list>
+
+        <!-- Place Select Details -->
+        <ion-item *ngIf="myPlaceSelected !== undefined" (click)="unselectPayee()">
+                <ion-avatar large item-start>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Toronto-Dominion_Bank_logo.svg/400px-Toronto-Dominion_Bank_logo.svg.png">
+                </ion-avatar>
+                <ion-icon name="checkmark-circle" item-end></ion-icon>
+                <h2>{{ myPlaceSelected.name}}, {{ myPlaceSelected.unit }} <!--<small><span color="secondary">(Unit/Apt#)</span></small>--></h2>
+                <h4>{{ myPlaceSelected.address1 }}</h4>
+                <p>{{ myPlaceSelected.city }},  {{ myPlaceSelected.province }}, {{ myPlaceSelected.postalCode }}</p>
+              <ion-badge>{{ myPlaceSelected.country }}</ion-badge>    
         </ion-item>
 
         <!-- Transaction Type --> 
@@ -49,6 +81,16 @@
             <ion-input formControlName="memo"></ion-input>
         </ion-item>
 
+        <!-- Payment Method Input Field Hidden -->
+        <ion-item hidden>
+            <ion-input formControlName="paymentMethod" [value]="paymentMethodSelected"></ion-input>
+        </ion-item>
+        
+        <!-- Payee Input Field Hidden -->
+        <ion-item hidden>
+            <ion-input formControlName="place" [value]="myPlaceSelected"></ion-input>
+        </ion-item>
+        
         
         <button ion-button full color="primary" type="submit" [disabled]="!transactionForm.valid">Send</button>
     </form>

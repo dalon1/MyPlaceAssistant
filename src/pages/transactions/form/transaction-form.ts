@@ -11,6 +11,8 @@ import { IPaymentMethod } from '../../../models/payment/IPaymentMethod';
 import { PaymentMethodManager } from '../../../providers/data-service/payment-method-service';
 import { AuthService } from '../../../providers/auth-service/auth-service';
 import { AlertController, NavController } from 'ionic-angular';
+import { IPlace } from '../../../models/place/IPlace';
+import { PlaceManager } from '../../../providers/data-service/place-service';
 
 
 
@@ -21,9 +23,14 @@ import { AlertController, NavController } from 'ionic-angular';
 export class TransactionFormPage {
     transactionForm : FormGroup;
     transactionTypes = TransactionType;
+    // Payment Methods Fields >>
+    paymentMethodsBackup : Array<IPaymentMethod>;
     paymentMethods : Array<IPaymentMethod>;
-    selectedPayment: string;
-    selectedPayee: string;
+    paymentMethodSelected : IPaymentMethod;
+    // My Places Fields >>
+    myPlacesBackup: Array<IPlace>;
+    myPlaces: Array<IPlace>;
+    myPlaceSelected : IPlace;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -31,6 +38,7 @@ export class TransactionFormPage {
         private app:App,
         private localSession: LocalSession,
         private paymentMethodManager: PaymentMethodManager,
+        private placeManager: PlaceManager,
         private authManager: AuthService,
         private alertController: AlertController,
         private navController: NavController
@@ -38,7 +46,10 @@ export class TransactionFormPage {
 
 
     ngOnInit() {
-        this.paymentMethods = this.loadPaymentMethods();
+        this.paymentMethodsBackup = this.loadPaymentMethods();
+        this.paymentMethods = this.paymentMethodsBackup;
+        this.myPlacesBackup = this.loadMyPlaces();
+        this.myPlaces = this.myPlacesBackup;
         this.transactionForm = this.formBuilder.group({
             // control - amount
             amount: this.formBuilder.control('', Validators.required),
@@ -47,7 +58,7 @@ export class TransactionFormPage {
             // control - payment method id
             paymentMethod: this.formBuilder.control('', Validators.required),
             // control - place - id
-            placeId: this.formBuilder.control(''),
+            place: this.formBuilder.control('', Validators.required),
             // control - transaction type
             transactionType: this.formBuilder.control('', Validators.required),
             // control - memo
@@ -69,23 +80,41 @@ export class TransactionFormPage {
         return paymentMethods;
     }
 
+    loadMyPlaces() : Array<IPlace> {
+        let places : Array<IPlace> = new Array<IPlace>();
+        this.placeManager.getPlacesByUser(this.authManager.afAuth.auth.currentUser.uid).subscribe((data : any) => {
+            data.forEach((myplace : any) => {
+                this.placeManager.getPlaceById(myplace.country, myplace.placeId).subscribe((place : IPlace) => {
+                    place.unit = myplace.unit;
+                    places.push(place);
+                });
+            });
+        });
+        return places;
+    }
+
     sendTransactionVerification(transactionForm: any) {
         let alert = this.alertController.create({
             title: 'Sending Transaction',
             subTitle: 'Please, confirm transaction\'s details',
             // this part force to do some mapping if i wanna display the payment method details and not the actual id.
-            message: `Are you sure want to send $${transactionForm.amount } ${transactionForm.currency} to ${transactionForm.placeId} 
-            using your ${transactionForm.paymentMethod.issuingNetwork} ending with ${transactionForm.paymentMethod.cardNumber}?`,
+            message: `Are you sure want to send $${transactionForm.amount } ${transactionForm.currency} to ${transactionForm.place.name}, ${transactionForm.place.unit} 
+            using your ${transactionForm.paymentMethod.issuingNetwork} ending with 
+            ${transactionForm.paymentMethod.cardNumber.slice(transactionForm.paymentMethod.cardNumber.length - 5, transactionForm.paymentMethod.cardNumber.length -1)}?`,
             buttons: [
                 {
-                    text: 'Yes',
+                    text: 'Cancel',
                     role: 'cancel',
+                    handler: ()=> {} 
+                },
+                {
+                    text: 'Yes',
                     handler: () => {
                         let transaction : ITransaction = {
                             id: null, 
                             referenceNumber: null,
                             userId: null,
-                            placeId: null,
+                            placeId: transactionForm.place.id,
                             createdAt: null,
                             amount: transactionForm.amount as number,
                             currency: transactionForm.currency,
@@ -96,11 +125,6 @@ export class TransactionFormPage {
                         };
                         this.sendTransaction(transaction as ITransaction);
                     }
-                },
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: ()=> {} 
                 }
             ]
         })
@@ -113,13 +137,22 @@ export class TransactionFormPage {
         this.navController.pop();
     }
 
-    selectPayment() {
-        this.localSession.setSelectedPayment(undefined);
-        this.app.getRootNav().push(PaymentMethodSelectPage);
-    }
-    selectPayee() {
-        this.app.getRootNav().push(MyPlaceSelectPage);
+    selectPaymentMethod(payment : IPaymentMethod) {
+        this.paymentMethodSelected = payment;
+        this.paymentMethods = new Array<IPaymentMethod>(); // empty again
     }
 
+    unselectPaymentMethod() {
+        this.paymentMethodSelected = undefined;
+        this.paymentMethods = this.paymentMethodsBackup;
+    }
 
+    selectPayee(place : IPlace) {
+        this.myPlaceSelected = place;
+        this.myPlaces = new Array<IPlace>(); // empty again
+    }
+    unselectPayee() {
+        this.myPlaceSelected = undefined;
+        this.myPlaces = this.myPlacesBackup;
+    }
 }

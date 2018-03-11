@@ -5,7 +5,7 @@ import { Pipe } from '@angular/core';
 })
 export class MaskCardNumber  {
     transform(data: string) {
-        return '**** ' + data.slice(data.length - 5, data.length -1);;
+        return '**** ' + data.slice(data.length - 5, data.length -1);
     }
     constructor() {}
 }
